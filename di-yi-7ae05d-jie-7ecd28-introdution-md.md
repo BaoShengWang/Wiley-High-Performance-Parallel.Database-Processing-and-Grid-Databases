@@ -1,20 +1,16 @@
-\# 在此处输入标题
+# 1.介绍
 
-标签（空格分隔）： 并行数据库-介绍
+本章是对 Wiley High Performance Parallel.Database Processing and Grid Databases 第一章的读书笔记。
 
----
 
-Wiley High Performance Parallel.Database Processing and Grid Databases读书笔记
 
-\#\# 1.介绍
-
-\#\#\# 1.1 度量指标
+## 1.1 度量指标
 
 并行数据库系统的目标是提升数据计算性能。吞吐和响应时间是衡量并行数据库系统性能的两个重要指标。如何量化并行数据库系统的吞吐和响应时间呢，我们引入两个指标：speed up和scala up。
 
-\#\#\#\# 1.1.1 speed up
+### 1.1.1 speed up
 
-&gt;\* spped up 说的是，给定一个数据库操作，增加一个processor之后，计算时间能减少多少。可以发现，speed up主要用于衡量系统的响应时间\(respond time\)
+> \* spped up 说的是，给定一个数据库操作，增加一个processor之后，计算时间能减少多少。可以发现，speed up主要用于衡量系统的响应时间\(respond time\)
 
 公式:
 
@@ -24,19 +20,21 @@ $$speed up=单个处理器计算时间/多个处理器计算时间$$
 
 举一个例子，如果某个计算任务，用1个处理器计算它，用时100分钟，当使用5个处理器时，计算用了20分钟，那么speed up =100/20=5。speed up正好等于\*\*处理器个数\*\*，因此这是linear speed up。如果使用5个处理器计算了50分钟，那么speed up=100/50=2,该值小于处理器个数5，因此这是sublinear speed up。
 
-\#\#\#\# 1.1.2 scala up
+### 1.1.2 scala up
 
-&gt;\* scala up,说的是同时增加事务个数和processor个数，事务处理时间是否维持不变。其衡量的是系统的吞吐能力\(thoughput\)
+scala up,说的是同时增加事务个数和processor个数，事务处理时间是否维持不变。其衡量的是系统的吞吐能力\(thoughput\)
 
 举一个例子，如果1个处理器10分钟内可以处理100个事务，现在如果将事务增加到300个，并同时将处理器个数也增加到3个，那么在事务和处理器增加前后，平均单个事务的计算时间是否发生了变化：
 
-&gt;\* linear scala up,如果3个处理器计算300个事务时间仍然是10分钟，那么此时scala up=1，这说明平均单个事务处理时间没有发生变化，很好，这是linear scala up。
+* linear scala up,如果3个处理器计算300个事务时间仍然是10分钟，那么此时scala up=1，这说明平均单个事务处理时间没有发生变化，很好，这是linear scala up。
 
-&gt;\* sublinear scala up,如果计算时间超过了10分钟，比如是15分钟，那么此时scala up=0.67，这说明原来平均处理一个事务是1分钟，现在降低到了0.67分钟，虽然吞吐增加了，但是事务相应时间取提高了。
+* sublinear scala up,如果计算时间超过了10分钟，比如是15分钟，那么此时scala up=0.67，这说明原来平均处理一个事务是1分钟，现在降低到了0.67分钟，虽然吞吐增加了，但是事务相应时间取提高了。
 
-&gt;\* superlinear scala up,很少见。
+* superlinear scala up,很少见。
 
-\#\#\# 1.2 瓶颈
+
+
+## 1.2 瓶颈
 
 有很多因此可能会降低系统的speed up和scala up。其中，start up和consolidation会影响系统的speed up。Interference and Communication则同时影响speed up和scala up。
 
