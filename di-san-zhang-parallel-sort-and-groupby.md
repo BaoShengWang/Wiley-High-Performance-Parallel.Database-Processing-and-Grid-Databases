@@ -12,7 +12,7 @@ group selectivity对算法性能的影响非常大。文献1指出，上述三�
 
 当group selectivity\(分组个数比较少时\)，该算法性能较好，但是当group selectivity增加时，coordinator processor将会成为计算瓶颈。
 
-
+![](/assets/并行聚合之传统算法.png)
 
 ## 3.1.2 Two Phase Aggregation
 
@@ -20,13 +20,18 @@ group selectivity对算法性能的影响非常大。文献1指出，上述三�
 
 two-phase算法分为两个阶段：local aggregation和global aggregation。在local aggregation阶段，每一个processor在本地按照group by key 列聚合，例如processor1生成\(Math,300\),\(Science,500\),processor 2生成（business,100）,\(science,100\)...。接下来在global aggregation阶段，每一个processor上的所有本地聚合结果按照hash或者range算法distribution到所有processor聚合生成全局计算结果。
 
-
+![](/assets/并行聚合之-两阶段算法.png)
 
 ## 3.1.3 Repartitioning Algorithm\(Redistribution Method\)
 
-该算法和前两种算法相比，没有local aggregation。该算法假设集群使用高速互联网络，算法的第一个阶段在每一个processor上执行repartition/distribution操作，将具有相同key的值聚合到同一个processor上。算法的第二个阶段对分区后的数据进行全局聚合操作。
+该算法和前两种算法相比，没有local aggregation。该算法假设集群使用高速互联网络，算法的第一个阶段在每一个processor上执行repartition/distribution操作，将具有相同key的值聚合到同一个processor上。  
+算法的第二个阶段对分区后的数据进行全局聚合操作。
 
 ![](/assets/并行聚合之分区算法.png)
+
+## 3.1.4可适配并行聚合算法
+
+可以参考Adaptive Parallel Aggregation Algorithms 论文。
 
 # 3.2 并行排序
 
