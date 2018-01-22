@@ -11,12 +11,10 @@
 作者的目的是设计一种新的算法\(目前来看，这个算法的名字就叫做Adaptive Parallel Aggregation Algorithms \)，该算法能够在运行的时候根据group number的多少，动态的在算法1，算法2，算法3之间选择一个性能最佳的算法来实现并行聚合。
 
 * **算法1： Centralized Two Phase AlSgorithm**，该算法的核心平均是coordinator processor是串行的，当group number较大时，coodinator processor将成为系统瓶颈。
-* **算法2： Two Phase Aggregation**，该算法的核心开销时local aggregation阶段的磁盘io开销。
+* **算法2： Two Phase Aggregation**，该算法的核心开销是local aggregation阶段的磁盘io开销。
 * **算法3： Repartitioning Algorithm\(Redistribution Method\)**。与算法2相比，该算法没有local aggregation。该算法也是分为两个阶段，第一个阶段是Repartitioning/Redistribution，每一个processor使用hash或者range算法将tuple分发到所有processor，第二个阶段，在每一个processor执行聚合操作。该算法的核心开销时网络开销。
 
 算法2和算法3之间的核心矛盾是：算法2在local aggregation时，可能会有较高的磁盘IO开销，因为其可能使用hash或者sort算法来执行local aggregation，当数据非常大的时候，我们知道只能使用多路哈希或者多路sort来实现聚合，通常而言，这需要多次读写表，从而导致较大的磁盘开销。而算法3的没有local aggregation，其在distribution时只会从磁盘读取一遍数据，其核心开销时网络数据传输。如果我们假设使用的高速互联网络，比如10Gps，那么网络传输数据将非常快。算法2和磁盘IO开销和算法3的网络开销可能相互抵消。
-
-
 
 > \* 核心：
 >
@@ -41,15 +39,12 @@
 
 将剩下的元祖直接distribution。
 
-   2.  在global aggregation阶段，它可能会收到两种类型的数据：一种时local aggregation result，一种是原始元祖。它必须对二者进行一个最终的合并处理。可以以local aggregation result来build hash table，然后以raw tuple作为probe来尽心工具盒。
+1. 在global aggregation阶段，它可能会收到两种类型的数据：一种时local aggregation result，一种是原始元祖。
+   它必须对二者进行一个最终的合并处理。可以以local aggregation result来build hash table，然后以raw tuple作为probe来尽心工具盒。
 
 ![](/assets/并行可适配聚合算法.png)
 
-
-
 ## 方案3：Adaptive Repartitioning Algorithm
 
- 和算法2类似。只不过一开始使用repartitioning算法
-
-
+和算法2类似。只不过一开始使用repartitioning算法
 
