@@ -2,8 +2,6 @@
 
 本章是对 Wiley High Performance Parallel.Database Processing and Grid Databases 第一章的读书笔记。
 
-
-
 ## 1.1 度量指标
 
 并行数据库系统的目标是提升数据计算性能。吞吐和响应时间是衡量并行数据库系统性能的两个重要指标。如何量化并行数据库系统的吞吐和响应时间呢，我们引入两个指标：speed up和scala up。
@@ -31,8 +29,6 @@ scala up,说的是同时增加事务个数和processor个数，事务处理时�
 * sublinear scala up,如果计算时间超过了10分钟，比如是15分钟，那么此时scala up=0.67，这说明原来平均处理一个事务是1分钟，现在降低到了0.67分钟，虽然吞吐增加了，但是事务相应时间取提高了。
 
 * superlinear scala up,很少见。
-
-
 
 ## 1.2 瓶颈
 

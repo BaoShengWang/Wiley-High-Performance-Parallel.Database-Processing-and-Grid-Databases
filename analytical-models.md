@@ -4,19 +4,17 @@
 
 > \* 本章需要重点掌握开销方程中常用的几个参数意义及其符号，这些符号后面会经常用到，还要知道每一个参数用在什么地方，比如关系的元祖个数\|R\|用在什么地方，然后重点了解如何对数据倾斜进行建模。
 
-
-
 开销方程\(cost equation\),在并行数据库系统中，一个开销方程是一组变量的函数，记为f\(x1,x2,x3,...,xn\)，在查询运行的时候，这些变量将被置换为实际的值，从而得出开销值，这个开销值的单位是时间。因此开销方程可以用于估计查询算法的计算时间。开销方程由以下几个变量组成：
 
-*  ** data paramters** 
+* ** data paramters**
 
-*  ** system paramters**
+* ** system paramters**
 
-*  ** query paramters**
+* ** query paramters**
 
-*  ** communication cost**
+* ** communication cost**
 
-##  2.1 data parameters
+## 2.1 data parameters
 
 关系R的元祖个数记为\|R\|,元祖大小记为R，单位为字节。
 
