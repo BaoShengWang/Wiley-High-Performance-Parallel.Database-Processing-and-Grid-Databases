@@ -1,6 +1,6 @@
 # 3.1 并行聚合
 
-group selectivity对算法性能的影响非常大。文献1指出，上述三种算法均不能适应所有group selectivity，每一个算法只有在某个笃定的group selectivity范围内才能取得最佳性能。当group selectivety较小时，Centralized Two Phase Algo和Two Phase Aggregation性能较好，当group selectivety增大到一定程度后，Repartitioning Algorithm算法性能最好，这里令人惊奇的是，尽管Repartitioing Algorithm会distribution原始数据，但是网络传输开销并没有占据一个主导地位，原因是，在MPP系统中，总是假设使用一个高速互连网络传输数据。
+group selectivity对算法性能的影响非常大。文献1指出，上述三种算法均不能适应所有group selectivity，每一个算法只有在某个笃定的group selectivity范围内才能取得最佳性能。当group selectivety较小时，Centralized Two Phase Algo和Two Phase Aggregation性能较好，当group selectivety增大到一定程度后，Repartitioning Algorithm算法性能最好，这里令人惊奇的是，尽管Repartitioing Algorithm会distribution原始数据，但是网络传输开销并没有占据一个主导地位，原因是，**在MPP系统中，总是假设使用一个高速互连网络传输数据。**
 
 ![](/assets/并行group算法性能.png)
 
