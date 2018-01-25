@@ -13,4 +13,5 @@
 * [introduction](introduction.md)
 * [analytical models](analytical-models.md)
 * [parallel group](parallel-group.md)
+* [group-by-join](group-by-join.md)
 
