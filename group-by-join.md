@@ -20,17 +20,21 @@ Eary Distribution Schema借鉴了并行join算法的思想：先将表R和S按�
 
 **3.join**，将上一步骤中产生的聚合结果和另外一个表进行join，最后返回结果。
 
-
-
 因为该算法是先分发原始数据，所以可能具有非常高的通信开销，如果我们使用高速互连网络，那么可以使用该算法。
 
 研究发现，当group number数目非常大，该算法具有非常好的性能。
 
-
-
 ## 1.2 Early GroupBy with partitioning scheme
 
+1.local aggregation,在分发之前，先在每一个processor上执行local aggregation。
 
+2.distribution，按照group attribute 将local aggregation分区到N个processor上。
+
+3.global aggregation and join，在每一个processor上执行全局聚合，然后join，返回最终结果。
+
+
+
+该算法因为先执行local aggregation，然后在distribution，因此当group number数据比较少时，可以显著的降低通信开销。
 
 ## 1.3 Early GroupBy with replication scheme
 
